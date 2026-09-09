@@ -241,12 +241,10 @@
   </section>
 
   <!-- ================= CONTACTO ================= -->
-  <section class="section" id="contacto">
+  <!-- ================= CONTACTO ================= -->
+  <section class="section--tight hairline" id="contacto">
     <div class="wrap contact-grid">
-      <div class="contact-info reveal">
-        <div class="section-num">06 — Contacto</div>
-        <h2 class="section-title">Fale com a Roadhouse</h2>
-        <p class="section-lede">Envie-nos as necessidades da sua organização e entraremos em contacto para avaliar a melhor solução Cloudflare para o seu ambiente digital.</p>
+      <div class="contact-info">
         <dl>
           <div><dt>E-mail</dt><dd><a href="mailto:mailtoroadhouse@gmail.com">mailtoroadhouse@gmail.com</a></dd></div>
           <div><dt>Localização</dt><dd>Angola</dd></div>
@@ -254,37 +252,40 @@
         </dl>
       </div>
 
-      <form class="reveal" id="contact-form">
+      <form id="contact-form" action="https://formspree.io/f/xoeqyezr" method="POST">
+        <!-- Redireciona o utilizador de volta para a sua página inicial após o envio com sucesso -->
+        <input type="hidden" name="_next" value="https://roadhouse.ao/">
+        
         <div class="form-row">
-          <div class="field"><label for="nome">Nome</label><input id="nome" name="nome" type="text" required></div>
-          <div class="field"><label for="empresa">Empresa</label><input id="empresa" name="empresa" type="text" required></div>
+            <div class="field"><label for="nome">Nome</label><input id="nome" name="nome" type="text" required></div>
+            <div class="field"><label for="empresa">Empresa</label><input id="empresa" name="empresa" type="text" required></div>
         </div>
         <div class="form-row">
-          <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" required></div>
-          <div class="field"><label for="telefone">Telefone</label><input id="telefone" name="telefone" type="tel"></div>
+            <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" required></div>
+            <div class="field"><label for="telefone">Telefone</label><input id="telefone" name="telefone" type="tel" required></div>
         </div>
         <div class="form-row">
-          <div class="field full">
-            <label for="assunto">Assunto</label>
-            <select id="assunto" name="assunto">
-              <option>Cloudflare Zero Trust</option>
-              <option>Cloudflare WAF</option>
-              <option>Cloudflare SASE</option>
-              <option>Proteção DDoS</option>
-              <option>CDN e desempenho</option>
-              <option>Outro</option>
-            </select>
-          </div>
+            <div class="field full">
+                <label for="assunto">Assunto</label>
+                <select id="assunto" name="assunto">
+                    <option>Cloudflare Zero Trust</option>
+                    <option>Cloudflare WAF</option>
+                    <option>Cloudflare SASE</option>
+                    <option>Proteção DDoS</option>
+                    <option>CDN e desempenho</option>
+                    <option>Outro</option>
+                </select>
+            </div>
         </div>
         <div class="form-row">
-          <div class="field full"><label for="mensagem">Mensagem</label><textarea id="mensagem" name="mensagem" required></textarea></div>
+            <div class="field full"><label for="mensagem">Mensagem</label><textarea id="mensagem" name="mensagem" required></textarea></div>
         </div>
-        <button type="submit" class="btn btn-primary">Enviar pedido</button>
-        <p id="form-status" style="margin-top:14px;font-size:13px;color:var(--text-faint);"></p>
+
+        <button type="submit" id="submit-button" class="btn btn-primary">Enviar pedido</button>
+        <p id="form-status" style="margin-top:14px; font-size:11px; color:var(--text-faint);"></p>
       </form>
     </div>
   </section>
-
 </main>
 
 <footer>
@@ -301,11 +302,11 @@
         <div class="footer-col">
           <h4>Navegação</h4>
           <ul>
-            <li><a href="/">Início</a></li>
+            <li><a href="index.html">Início</a></li>
             <li><a href="#solucoes">Soluções</a></li>
             <li><a href="cloudflare-angola.html">Cloudflare em Angola</a></li>
             <li><a href="#porque">Sobre</a></li>
-            <li><a href="#contacto">Contactos</a></li>
+            <li><a href="contactos.html">Contactos</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -335,3 +336,4 @@
 <script src="assets/script.js"></script>
 </body>
 </html>
+
