@@ -71,6 +71,9 @@
       </div>
 
 <form id="contact-form" action="https://formspree.io/f/xoeqyezr" method="POST">
+    <!-- Redireciona o utilizador de volta para a sua página após o envio com sucesso -->
+    <input type="hidden" name="_next" value="https://roadhouse.ao">
+    
     <div class="form-row">
         <div class="field"><label for="nome">Nome</label><input id="nome" name="nome" type="text" required></div>
         <div class="field"><label for="empresa">Empresa</label><input id="empresa" name="empresa" type="text" required></div>
