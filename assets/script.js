@@ -28,19 +28,59 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach(el => el.classList.add('in'));
   }
 
-  // contact form — client-side only (mailto fallback)
+  // contact form — Envio assíncrono via Formspree (Sem abrir aplicação de e-mail)
   const form = document.getElementById('contact-form');
   if (form) {
     form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-      const subject = encodeURIComponent('Pedido de contacto — ' + (data.get('empresa') || data.get('nome') || 'Roadhouse'));
-      const body = encodeURIComponent(
-        `Nome: ${data.get('nome') || ''}\nEmpresa: ${data.get('empresa') || ''}\nE-mail: ${data.get('email') || ''}\nTelefone: ${data.get('telefone') || ''}\nAssunto: ${data.get('assunto') || ''}\n\nMensagem:\n${data.get('mensagem') || ''}`
-      );
-      window.location.href = `mailto:roadhouse@gmail.com?subject=${subject}&body=${body}`;
+      e.preventDefault(); // Impede o recarregamento da página ou abertura do mailto
+      
+      const button = document.getElementById('submit-button');
       const status = document.getElementById('form-status');
-      if (status) status.textContent = 'A abrir o seu cliente de e-mail…';
+      
+      if (button) {
+        button.disabled = true;
+        button.innerText = 'A enviar...';
+      }
+      if (status) {
+        status.textContent = '';
+      }
+
+      const data = new FormData(form);
+      
+      fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          if (status) {
+            status.style.color = '#28a745'; // Cor verde de sucesso
+            status.textContent = 'Obrigado! O seu pedido foi enviado com sucesso. Entraremos em contacto brevemente.';
+          }
+          form.reset(); // Limpa todos os campos do formulário
+          if (button) button.innerText = 'Enviado';
+        } else {
+          if (status) {
+            status.style.color = '#dc3545'; // Cor vermelha de erro
+            status.textContent = 'Oops! Ocorreu um problema ao enviar o seu pedido.';
+          }
+        }
+      }).catch(error => {
+        if (status) {
+          status.style.color = '#dc3545'; // Cor vermelha de erro
+          status.textContent = 'Oops! Ocorreu um erro de rede. Verifique a sua ligação.';
+        }
+      }).finally(() => {
+        setTimeout(() => {
+          if (button) {
+            button.disabled = false;
+            button.innerText = 'Enviar pedido';
+          }
+        }, 4000);
+      });
     });
   }
 });
+
